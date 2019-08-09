@@ -8,7 +8,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.note.NoteAplication;
 import com.example.note.R;
+import com.example.note.model.Note;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -21,11 +25,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setupRecyclerView();
         setupNoteListener();
+        getDataFromDB();
     }
     private void setupRecyclerView(){
         recyclerView  = findViewById(R.id.recyclerView);
         recyclerView.setAdapter(adapter = new NoteAdapter());
     }
+
+    private void getDataFromDB(){
+       List<Note> list = NoteAplication.getServise()
+                .getNotes();
+        adapter.undate(list);
+    }
+
     private void setupNoteListener(){
         editText = findViewById(R.id.editText);
         addButton = findViewById(R.id.addButton);
@@ -36,7 +48,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             String note = editText.getText().toString();
-            adapter.addItem(note);
+            adapter.addItem(new Note(note));
+            NoteAplication.getServise()
+                    .saveNotes(adapter.getList());
         }
     };
+
 }

@@ -6,9 +6,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.note.R;
+import com.example.note.model.Note;
 import com.example.note.ui.Base.BeseViewHolder;
 
-public class NoteViewHolder extends BeseViewHolder<String> {
+public class NoteViewHolder extends BeseViewHolder<Note> {
     private TextView textView;
 
     public NoteViewHolder(@NonNull View itemView) {
@@ -17,8 +18,8 @@ public class NoteViewHolder extends BeseViewHolder<String> {
     }
 
     @Override
-    protected void bind(String value) {
-        textView.setText(value);
+    protected void bind(Note value) {
+        textView.setText(value.getNote());
     }
 
     @Override

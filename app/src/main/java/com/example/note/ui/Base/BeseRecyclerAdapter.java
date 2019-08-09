@@ -51,4 +51,8 @@ public abstract class BeseRecyclerAdapter<V extends BeseViewHolder, T> extends R
     protected abstract int getLaioutRes();
 
     protected abstract V getViewHolder(View view);
+
+    public List<T> getList(){
+        return list;
+    }
 }
