@@ -7,6 +7,10 @@ import com.example.note.model.Note;
 import com.example.note.ui.Base.BeseRecyclerAdapter;
 
 public class NoteAdapter extends BeseRecyclerAdapter<NoteViewHolder, Note> {
+    private Listener listener;
+    public NoteAdapter (Listener listener){
+        this.listener = listener;
+    }
 
     @Override
     protected int getLaioutRes() {
@@ -15,7 +19,7 @@ public class NoteAdapter extends BeseRecyclerAdapter<NoteViewHolder, Note> {
 
     @Override
     protected NoteViewHolder getViewHolder(View view) {
-        return new NoteViewHolder(view);
+        return new NoteViewHolder(view, listener);
 
     }
 

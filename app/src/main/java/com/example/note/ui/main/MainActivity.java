@@ -14,7 +14,7 @@ import com.example.note.model.Note;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Listener {
     private RecyclerView recyclerView;
     private EditText editText;
     private ImageButton addButton;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setupRecyclerView(){
         recyclerView  = findViewById(R.id.recyclerView);
-        recyclerView.setAdapter(adapter = new NoteAdapter());
+        recyclerView.setAdapter(adapter = new NoteAdapter(this));
     }
 
     private void getDataFromDB(){
@@ -47,11 +47,18 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String note = editText.getText().toString();
-            adapter.addItem(new Note(note));
+            String message = editText.getText().toString();
+            Note note = new Note(message);
+            adapter.addItem(note);
             NoteAplication.getServise()
-                    .saveNotes(adapter.getList());
+                    .saveNote(note);
         }
     };
 
+    @Override
+    public void onDeliteItem(Note note, int adapterPosition) {
+        NoteAplication.getServise()
+                .deleteNote(note);
+        adapter.deleteItem(adapterPosition);
+    }
 }

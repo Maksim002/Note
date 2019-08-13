@@ -6,7 +6,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 public class DatabeseManadjer {
-    private final String DATABESE_NAME = "Notelist";
+    private final String DATABESE_NAME = "date";
 
     public DatabeseManadjer(Context context){
         Realm.init(context);

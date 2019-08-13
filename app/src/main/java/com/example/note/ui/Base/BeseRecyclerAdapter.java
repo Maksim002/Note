@@ -55,4 +55,9 @@ public abstract class BeseRecyclerAdapter<V extends BeseViewHolder, T> extends R
     public List<T> getList(){
         return list;
     }
+
+    public void deleteItem(int adapterPosition) {
+            list.remove(adapterPosition);
+            notifyItemRemoved(adapterPosition);
+    }
 }
